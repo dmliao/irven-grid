@@ -1,0 +1,127 @@
+// A lightweight, responsive CSS grid
+// that is extraordinarily customizable with SCSS
+
+$responsive-desktop-threshold: 1140px;
+$responsive-tablet-threshold: 800px;
+$responsive-mobile-threshold: 600px;
+
+$frame-class:".frame";
+$frame-max-width: 1024px;
+$frame-desktop-width: 720px;
+$frame-tablet-width: 520px;
+$frame-mobile-width: 400px;
+
+$row-class:".row";
+$row-margin: 20px;
+$row-mobile-padding: 10px;
+
+$column-class: "c-";
+
+$columns-number: 12;
+$columns-padding: 10px;
+$columns-mobile-sep: 10px;
+
+// DO NOT EDIT VARIABLES BELOW THIS LINE
+
+$column-width: 100% / $columns-number;
+
+// DO NOT EDIT VARIABLES ABOVE THIS LINE
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+
+  /* Removes padding behavior on widths */
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+// FRAME //
+#{$frame-class} {
+	max-width: $frame-max-width;
+	margin: 0 auto;
+	position:relative;
+}
+
+/* Clearfix */
+#{$frame-class}:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+// ROWS //
+#{$row-class} {
+	margin-bottom: $row-margin;
+	position:relative;
+	width: 100%;
+	overflow:hidden;
+}
+
+// COLUMNS //
+// for desktop, do all of the calculations!
+@for $i from 1 through $columns-number {
+    .#{$column-class}#{$i} {
+        width: $column-width*$i;
+    }
+}
+
+[class*=#{$column-class}] {
+  float:left;
+  padding-left: $columns-padding;
+  padding-right:$columns-padding;
+}
+
+// Mobile Setting
+@media (max-width: $responsive-mobile-threshold) {
+	// FRAME //
+	#{$frame-class} {
+		max-width: $frame-mobile-width;
+	}
+
+	// ROWS //
+	#{$row-class} {
+		padding: 0 $row-mobile-padding 0 $row-mobile-padding;
+	}
+
+	// COLUMNS //
+	// for mobile, all of them just have width 100%
+	@for $i from 1 through $columns-number {
+	    .#{$column-class}#{$i} {
+	        width: 100%;
+	        margin-bottom: $columns-mobile-sep;
+	    }
+	}
+
+
+}
+
+// Tablet Setting
+@media (min-width: $responsive-mobile-threshold) and (max-width: $responsive-tablet-threshold) {
+	// FRAME //
+	#{$frame-class} {
+		max-width: $frame-tablet-width;
+	}
+
+	// ROWS //
+	#{$row-class} {
+		padding: 0;
+	}
+
+
+}
+
+// Small Desktop Setting
+@media (min-width: $responsive-tablet-threshold) and (max-width: $responsive-desktop-threshold) {
+	#{$frame-class} {
+		max-width: $frame-desktop-width;
+	}
+
+	// ROWS //
+	#{$row-class} {
+		padding: 0;
+	}
+}
