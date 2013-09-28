@@ -1,8 +1,8 @@
 // A lightweight, responsive CSS grid
 // that is customizable with SCSS
 
-// This version displays grids with floats,
-// so uses an extra row class to organize the columns
+// This version uses inline-blocks to display its grids
+// so does not require the use of rows to clear floats.
 
 $responsive-desktop-threshold: 1140px;  // the upper limit for the laptop / small desktop query
 $responsive-tablet-threshold: 800px; // the upper limit for the tablet media query
@@ -14,15 +14,12 @@ $frame-desktop-width: 720px; // max width of the frame for the laptop / small de
 $frame-tablet-width: 520px; // max width of the frame for the tablet media query
 $frame-mobile-width: 400px; // max width of the frame on mobile devices
 
-$row-class:".row"; // class name for individual rows
-$row-margin: 20px; // vertical separation between rows on desktop or tablet browsers
-$row-mobile-padding: 10px; // horizontal padding on rows for mobile browsers
-
 $column-class: "c-"; // class name for individual columns (will be succeeded by a column number)
 					 // e.g. "c-" will render as "c-4", "c-12", in column names
 
 $columns-number: 12; // total number of columns in the grid. Go nuts.
 $columns-padding: 10px; // left and right padding of the columns, or the space between them
+$columns-sep: 20px; // vertical separation between columns on desktop / tablet browsers
 $columns-mobile-sep: 10px; // vertical separation between columns on mobile
 
 // DO NOT EDIT VARIABLES BELOW THIS LINE
@@ -57,16 +54,8 @@ $column-width: 100% / $columns-number;
 	clear: both;
 }
 
-// ROWS //
-#{$row-class} {
-	margin-bottom: $row-margin;
-	position:relative;
-	width: 100%;
-	overflow:hidden;
-}
-
 // COLUMNS //
-// for desktop, do all of the calculations!
+// for desktop, do all of the width calculations!
 @for $i from 1 through $columns-number {
     .#{$column-class}#{$i} {
         width: $column-width*$i;
@@ -74,9 +63,12 @@ $column-width: 100% / $columns-number;
 }
 
 [class*='#{$column-class}'] {
-  float:left;
+  display: inline-block;
   padding-left: $columns-padding;
   padding-right:$columns-padding;
+  margin-right: -.25em;
+  vertical-align: top;
+  margin-bottom: $columns-sep;
 }
 
 // Mobile Setting
@@ -84,12 +76,6 @@ $column-width: 100% / $columns-number;
 	// FRAME //
 	#{$frame-class} {
 		max-width: $frame-mobile-width;
-	}
-
-	// ROWS //
-	#{$row-class} {
-		padding: 0 $row-mobile-padding 0 $row-mobile-padding;
-		margin-bottom:0;
 	}
 
 	// COLUMNS //
@@ -108,23 +94,11 @@ $column-width: 100% / $columns-number;
 	#{$frame-class} {
 		max-width: $frame-tablet-width;
 	}
-
-	// ROWS //
-	#{$row-class} {
-		padding: 0;
-	}
-
-
 }
 
 // Small Desktop Setting
 @media (min-width: $responsive-tablet-threshold) and (max-width: $responsive-desktop-threshold) {
 	#{$frame-class} {
 		max-width: $frame-desktop-width;
-	}
-
-	// ROWS //
-	#{$row-class} {
-		padding: 0;
 	}
 }

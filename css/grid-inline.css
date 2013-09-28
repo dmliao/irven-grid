@@ -22,13 +22,6 @@
   clear: both;
 }
 
-.row {
-  margin-bottom: 20px;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
 .c-1 {
   width: 8.33333%;
 }
@@ -78,19 +71,17 @@
 }
 
 [class*='c-'] {
-  float: left;
+  display: inline-block;
   padding-left: 10px;
   padding-right: 10px;
+  margin-right: -.25em;
+  vertical-align: top;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 600px) {
   .frame {
     max-width: 400px;
-  }
-
-  .row {
-    padding: 0 10px 0 10px;
-    margin-bottom: 0;
   }
 
   [class*='c-'] {
@@ -102,17 +93,9 @@
   .frame {
     max-width: 520px;
   }
-
-  .row {
-    padding: 0;
-  }
 }
 @media (min-width: 800px) and (max-width: 1140px) {
   .frame {
     max-width: 720px;
-  }
-
-  .row {
-    padding: 0;
   }
 }
