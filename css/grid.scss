@@ -85,6 +85,7 @@ $column-width: 100% / $columns-number;
 	// ROWS //
 	#{$row-class} {
 		padding: 0 $row-mobile-padding 0 $row-mobile-padding;
+		margin-bottom:0;
 	}
 
 	// COLUMNS //
